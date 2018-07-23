@@ -3,28 +3,29 @@
 
 Servo myservo1;
 Servo myservo2;
-//SoftwareSerial Serial(10, 11);
+//SoftwareSerial BTSerial(10, 11);
 char unchar;
-String readString;
+//String readString;
 int OutServo1=5;
 int OutServo2=6;
-
+int vel = 0;
 void setup() {
 myservo1.attach(OutServo1);
 myservo2.attach(OutServo2);
-//Serial.begin(9600);
 Serial.begin(9600);
 pinMode(12,OUTPUT);
+
 }
 
 void loop() {
 
   if (Serial.available()){
     unchar = Serial.read();
-    if(unchar=='1'){
+    if(unchar=='1'){ 
       motor1();
-     
-    }
+      }
+    
+    
     if(unchar=='2'){
       motor2();
     }
@@ -36,26 +37,26 @@ void loop() {
 void motor1() {
       digitalWrite(12,HIGH);
       delay(500);
-      myservo1.write(90);
-      delay(1500);
-      //myservo1.write(0);
+      myservo1.writeMicroseconds(1700);
+      delay(100);
+      myservo1.writeMicroseconds(1500);
       unchar=""; 
-   
+
 }
 void motor2() {
      digitalWrite(12,HIGH);
      delay(500);
      digitalWrite(12,LOW);
-      myservo1.write(180);
-      delay(1500);
+     myservo1.writeMicroseconds(2000);
       unchar="";
 }
 void motor3() {
      digitalWrite(12,HIGH);
      delay(500);
      digitalWrite(12,LOW);
-      myservo1.write(135);
-      delay(1500);
+     myservo1.writeMicroseconds(700);
+      delay(500);
+      myservo1.writeMicroseconds(1500);
       unchar="";
 }
  // Codigo copiado de video de youtube para conectar servo que no hace mover ningun servo
